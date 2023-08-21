@@ -1,0 +1,23 @@
+version: '3.8'
+services:
+  grafana:
+    image: grafana/grafana:latest
+    ports:
+      - "3000:3000"
+    volumes:
+      - grafana-storage:/var/lib/grafana
+    environment:
+      - GF_SECURITY_ADMIN_USER=adminooo
+      - GF_SECURITY_ADMIN_PASSWORD=adminooo
+
+  postgres:
+    image: postgres:latest
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_USER=mlflow
+      - POSTGRES_PASSWORD=mlflowmlflow
+      - POSTGRES_DB=mlflow
+
+volumes:
+  grafana-storage:

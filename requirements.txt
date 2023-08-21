@@ -1,0 +1,9 @@
+prefect
+mlflow
+scikit-learn
+pandas
+pytest
+pre-commit
+flake8
+black
+evidently

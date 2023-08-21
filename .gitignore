@@ -1,0 +1,13 @@
+mlops-env/
+*.env
+*.pre-commit
+.mlops-zoomcamp-project.pem
+*.pem
+*.sql
+*.pkl
+mlruns/
+mlflow_artifacts/
+*.zip
+.ipynb_checkpoints/
+infrastructure/.*
+data/AB_NYC_2019.csv

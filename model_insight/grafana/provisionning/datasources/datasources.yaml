@@ -1,0 +1,11 @@
+apiVersion: 1
+
+datasources:
+  - name: MLflow
+    type: postgres
+    url: postgresql://mlflow:mlflow@localhost:5432/mlflow
+    user: mlflow
+    password: mlflow
+    database: mlflow
+    jsonData:
+      sslmode: "disable"

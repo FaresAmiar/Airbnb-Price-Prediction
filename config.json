@@ -1,0 +1,41 @@
+{
+    "deployment_mode" : "local",
+    "model" : {
+        "name": "RandomForestRegressor",
+        "module": "sklearn.ensemble",
+        "grid_search": {
+            "enable": true,
+            "parameters": {
+                "n_estimators": [10, 50],
+                "max_depth": [1, 10],
+                "min_samples_split": [2, 5]
+            }
+        },
+        "parameters" : {
+
+        },
+        "metric" : {
+            "module" : "sklearn.metrics",
+            "func" : "mean_squared_error",
+            "threshold" : 100
+        }
+    },
+    "mlflow": {
+        "local" :
+        {
+            "host": "localhost",
+            "port" : 5000,
+            "experiment_name": "Airbnb Price Prediction",
+            "model_name": "airbnb-price-predictor",
+            "backend_uri" : "postgresql://mlflow:mlflowmlflow@localhost:5432/mlflow",
+            "artifact_location" : "mlflow_artifacts",
+            "dataset" : "https://www.kaggle.com/datasets/dgomonov/new-york-city-airbnb-open-data/download?datasetVersionNumber=3"
+        },
+        "cloud" :
+        {
+              "host": "",
+              "port": 5432,
+              "experiment_name": "mlops-zoomcamp"
+        }
+}
+}
