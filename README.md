@@ -11,4 +11,5 @@ in api, change run_id by the one created when you launch the script
 
 In config.json, remove local and cloud prefix dict choose which you want and keep these values in "mlflow" 
 
-to run app : docker-compose, and compile dockerfile or use makefile with run-all (if you are in windows, for unix change the commands)
+to run app : docker-compose up -d
+and compile dockerfile, launch prefect and mlflow or directly use makefile with run-all (if you are in windows, for unix change the commands)
