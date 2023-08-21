@@ -37,5 +37,5 @@
               "port": 5432,
               "experiment_name": "mlops-zoomcamp"
         }
-}
+    }
 }
