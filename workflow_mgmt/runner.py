@@ -15,16 +15,20 @@ import joblib
 import os
 import json
 
+
+
 with open('config.json', 'r') as file:
     config = json.load(file)
+
+deployment_mode = config["deployment_mode"]
+mlflow_settings = config['mlflow'][deployment_mode]
 
 model_info = config['model']
 best_run_id = None
 
-backend_url = "postgresql://mlflow:mlflow@localhost:5432/mlflow"
-EXPERIMENT_NAME = config['mlflow']['experiment_name']
+backend_url = mlflow_settings["backend_uri"]
+EXPERIMENT_NAME = mlflow_settings['experiment_name']
 
-os.environ["AWS_PROFILE"] = "fares"
 
 @task
 def load_task():

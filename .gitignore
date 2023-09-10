@@ -11,3 +11,6 @@ mlflow_artifacts/
 .ipynb_checkpoints/
 infrastructure/.*
 data/AB_NYC_2019.csv
+*tfstate*
+*pycache*/
+--*/

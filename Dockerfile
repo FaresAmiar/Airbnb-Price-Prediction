@@ -9,6 +9,4 @@ COPY ./data/AB_NYC_2019.csv /app/data/AB_NYC_2019.csv
 
 RUN pip install --no-cache-dir -r requirements.txt
 
-
-
 CMD ["python", "./workflow_mgmt/runner.py"]

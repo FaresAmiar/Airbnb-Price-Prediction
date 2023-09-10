@@ -18,6 +18,7 @@ services:
       - POSTGRES_USER=mlflow
       - POSTGRES_PASSWORD=mlflowmlflow
       - POSTGRES_DB=mlflow
+      - POSTGRES_PASSWORD_POSTGRES=admin
 
 volumes:
   grafana-storage:
