@@ -1,0 +1,63 @@
+name: MLOps Zoomcamp - CI/CD Pipeline
+
+on:
+  pull_request:
+    branches:
+      - 'master'
+
+env:
+  AWS_DEFAULT_REGION: 'eu-west-3'
+  AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+  AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+
+jobs:
+
+  continuous-integration:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v3
+
+    - name: Set up Python 3.10
+      uses: actions/setup-python@v2
+      with:
+        python-version: '3.10'
+    
+    - name: Lint with flake8
+      run: |
+         flake8 .
+
+    - name: Installing dependencies
+      run: |
+        pip install --upgrade pip
+        pip install -r requirements.txt
+
+    - name: Run Tests
+      run: pytest
+
+  continuous-delivery:
+    needs: continuous-integration
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v3
+
+    - name: Setup AWS CLI
+      uses: aws-actions/configure-aws-credentials@v1
+      with:
+        aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        aws-region: eu-west-3
+        
+    - name: Configure AWS resources 
+      run: |
+        cd infrastructure
+        terraform init
+        terraform plan
+        terraform apply
+
+    - name: Copy dataset to S3
+      run: |
+        gdown https://drive.google.com/file/d/1RBSt2RiZ0XXFE2Zeq-M2ipjVsFllhEGp/view?usp=sharing -o ./data/AB_NYC_2019.csv
+        aws s3 cp ./data/AB_NYC_2019.csv s3://mlops-zoomcamp-dataset/
